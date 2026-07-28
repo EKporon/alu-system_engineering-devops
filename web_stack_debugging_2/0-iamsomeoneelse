@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Runs whoami command under the user as arg.
-sudo -u "$1" whoami
-
-# Check if an argument is provided
+# Check if arg is present
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <username>"
     exit 1
 fi
+
+# Run whoami command as the main user
+sudo -u "$1" whoami
