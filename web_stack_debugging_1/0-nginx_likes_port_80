@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 # Configure Nginx server to listen on port 80.
 
-rm /etc/nginx/sites-enabled/default
+rm -f /etc/nginx/sites-enabled/default
 
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
+nginx -t || exit 1
+
 service nginx restart
+
+sleep 1
+
+curl -s -o /dev/null -w "%{http_code}" http://localhost | grep -q "^200$" || exit 1
